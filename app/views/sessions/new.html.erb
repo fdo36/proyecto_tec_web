@@ -1,0 +1,38 @@
+<% if current_user %>
+
+  <%if current_user.name == "admin" %>
+    <div class="btn-group">
+      <%= form_tag "admin/camaras" do %>
+        <button class="btn"><%=submit_tag "Mantener cámaras"%></button>
+      <%end%>
+      <button class="btn">Algo más</button>
+      <button class="btn">Otra cosa</button>
+    </div>  
+
+  <%else%> 
+    <div class="btn-group">
+      <button class="btn">Ver cámaras</button>
+      <button class="btn">Dejar aviso</button>
+      <button class="btn">Contactar</button>
+    </div>
+  <%end%>
+
+<% else %>
+  <h1>Inicio sesión</h1>
+  
+  <p>
+    <%= link_to "Crear una cuenta", new_identity_path %> o inicia sesión abajo:.
+  </p>
+  
+  <%= form_tag "/auth/identity/callback" do %>
+    <div class="field">
+      <%= label_tag :auth_key, "Email" %><br>
+      <%= text_field_tag :auth_key %>
+    </div>
+    <div class="field">
+      <%= label_tag :Contraseña %><br>
+      <%= password_field_tag :password %>
+    </div>
+    <div class="actions"><%= submit_tag "Iniciar sesión" %></div>
+  <% end %>
+<% end %>
